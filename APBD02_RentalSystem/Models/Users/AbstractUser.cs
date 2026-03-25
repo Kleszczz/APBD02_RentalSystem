@@ -1,5 +1,11 @@
 ﻿namespace APBD02_RentalSystem.Models.Users;
 
+public enum UserType
+{
+    Student,
+    Employee
+}
+
 public abstract class AbstractUser
 {
     private int Id {get; set;}

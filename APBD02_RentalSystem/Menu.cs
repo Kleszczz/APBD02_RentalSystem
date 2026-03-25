@@ -1,54 +1,130 @@
-﻿namespace APBD02_RentalSystem;
+﻿using APBD02_RentalSystem.Models.Users;
+using APBD02_RentalSystem.Services;
+
+namespace APBD02_RentalSystem;
 
 /*
- Aplikacja powinna wspierać co najmniej następujące operacje: 
+ Aplikacja powinna wspierać co najmniej następujące operacje:
 1. Dodanie nowego użytkownika do systemu. - metoda
-2. Dodanie nowego sprzętu danego typu. 
-3. Wyświetlenie listy całego sprzętu z aktualnym statusem. 
-4. Wyświetlenie wyłącznie sprzętu dostępnego do wypożyczenia. 
-5. Wypożyczenie sprzętu użytkownikowi. 
-6. Zwrot sprzętu wraz z przeliczeniem ewentualnej kary za opóźnienie. 
-7. Oznaczenie sprzętu jako niedostępnego, np. z powodu uszkodzenia lub serwisu. 
-8. Wyświetlenie aktywnych wypożyczeń danego użytkownika. 
-9. Wyświetlenie listy przeterminowanych wypożyczeń. 
-10. Wygenerowanie krótkiego raportu podsumowującego stan wypożyczalni. 
+2. Dodanie nowego sprzętu danego typu.
+3. Wyświetlenie listy całego sprzętu z aktualnym statusem.
+4. Wyświetlenie wyłącznie sprzętu dostępnego do wypożyczenia.
+5. Wypożyczenie sprzętu użytkownikowi.
+6. Zwrot sprzętu wraz z przeliczeniem ewentualnej kary za opóźnienie.
+7. Oznaczenie sprzętu jako niedostępnego, np. z powodu uszkodzenia lub serwisu.
+8. Wyświetlenie aktywnych wypożyczeń danego użytkownika.
+9. Wyświetlenie listy przeterminowanych wypożyczeń.
+10. Wygenerowanie krótkiego raportu podsumowującego stan wypożyczalni.
  */
 
 public class Menu
 {
-
-    public void AddNewUser()
+    public static void RunMenu()
     {
-        Console.WriteLine("Pick user type:\n 1 - Student \n 2 - Employeee");
-        string userType = Console.ReadLine();
-        
-        Console.WriteLine("Name:");
-        string name = Console.ReadLine();
-        
-        Console.WriteLine("Surname:");
-        string surname = Console.ReadLine();
-
-        if (name is null || surname is null)
+        while (true)
         {
-            Console.WriteLine("Invalid input");
+            Console.Clear();
+            Console.WriteLine("=== MAIN MENU ===");
+            Console.WriteLine("1. Register new user");
+            Console.WriteLine("2. Add new equipment");
+            Console.WriteLine("3. Rent equipment");
+            Console.WriteLine("0. Exit");
+            Console.WriteLine("===================");
+            Console.Write("Choose an option: ");
+
+            var choice = GetValidInput();
+
+            switch (choice)
+            {
+                case "1":
+                    RegisterNewUser();
+                    break;
+                case "2":
+                    // AddNewEquipment();
+                    break;
+                case "3":
+                    // RentEquipment();
+                    break;
+                case "0":
+                    Environment.Exit(0); //Kills the program
+                    break;
+                default:
+                    Console.WriteLine("Unknown option, click ENTER to continue.");
+                    Console.ReadLine();
+                    break;
+            }
+        }
+    }
+
+
+    public static void RegisterNewUser()
+    {
+        Console.Clear();
+        Console.WriteLine("=== USER REGISTRATION ===");
+
+        Console.WriteLine("Pick user type to create (type number)");
+        Console.WriteLine("'1' - Student \n '2' - Employee \n '0' - Exit");
+        Console.Write("Input user type: ");
+        var userInput = GetValidInput();
+
+        if (userInput == "0") //exit to previous menu step
+        {
             return;
         }
+        
+        Console.WriteLine("Input name and surname");
+        Console.Write("Name: ");
+        var name = GetValidInput();
+        Console.Write("Surname: ");
+        var surname = GetValidInput();
 
-        if (userType == "1")
+        try
         {
-            //users.Add(new Student(name, surname));
+            switch (userInput)
+            {
+                case "1": //Student
+                    UserService.AddNewUser(UserType.Student, name, surname);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("STUDENT CREATED");
+                    Console.ResetColor();
+                    break;
+                case "2": //Employee
+                    UserService.AddNewUser(UserType.Employee, name, surname);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("EMPLOYEE CREATED");
+                    Console.ResetColor();
+                    break;
+                default:
+                    Console.WriteLine("Wrong user type. Try again.");
+                    break;
+            }
         }
-        else if (userType == "2")
+        catch (ArgumentException ex)
         {
-            //users.Add(new Employee(name, surname));
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Service error: {ex.Message}");
+            Console.ResetColor();
         }
-        else
-        {
-            Console.WriteLine("Invalid input");
-            return;
-        }
-        Console.WriteLine("User added");
+
+        
+
+        Console.WriteLine("Naciśnij dowolny klawisz, aby wrócić...");
+        Console.ReadKey();
     }
     
-    
+    private static string GetValidInput()
+    {
+        string? input;
+        do
+        {
+            input = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Console.WriteLine("Values can't be empty. Try again.");
+            }
+        } while (string.IsNullOrWhiteSpace(input));
+
+        return input;
+    }
 }

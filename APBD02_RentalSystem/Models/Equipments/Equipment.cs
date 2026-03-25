@@ -8,6 +8,13 @@ namespace APBD02_RentalSystem.Models.Equipments;
 - Każdy typ sprzętu powinien posiadać przynajmniej 2 własne pola specyficzne.
  */
 
+public enum EquipmentType
+{
+    Camera,
+    Laptop,
+    Projector
+}
+
 public abstract class Equipment
 {
     private int Id {get; set;}
