@@ -15,4 +15,12 @@ specyficznych. To jest dobry moment, żeby zastanowić się, co powinno być wsp
         kompozycja albo osobna klasa serwisowa.
 */
 
+using APBD02_RentalSystem;
+using APBD02_RentalSystem.Equipments;
+using APBD02_RentalSystem.Users;
+
+List<Equipment> equipments = [];
+List<AbstractPerson> users = [];
+List<Rental> rentals = [];
+
 Console.WriteLine("Hello, World!");
