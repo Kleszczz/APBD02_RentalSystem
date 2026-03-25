@@ -16,8 +16,9 @@ specyficznych. To jest dobry moment, żeby zastanowić się, co powinno być wsp
 */
 
 using APBD02_RentalSystem;
-using APBD02_RentalSystem.Equipments;
-using APBD02_RentalSystem.Users;
+using APBD02_RentalSystem.Models;
+using APBD02_RentalSystem.Models.Equipments;
+using APBD02_RentalSystem.Models.Users;
 
 List<Equipment> equipments = [];
 List<AbstractPerson> users = [];

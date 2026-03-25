@@ -1,20 +1,20 @@
-﻿using APBD02_RentalSystem.Equipments;
-using APBD02_RentalSystem.Users;
+﻿using APBD02_RentalSystem.Models.Equipments;
+using APBD02_RentalSystem.Models.Users;
 
-namespace APBD02_RentalSystem;
+namespace APBD02_RentalSystem.Models;
 
-public class Rental(DateTime rentalExpctedEndDateAndTime, AbstractPerson rentalPerson, Equipment rentalEquipment)
+public class Rental(DateTime rentalExpectedEndDateAndTime, AbstractPerson rentalPerson, Equipment rentalEquipment)
 {
-    private DateTime rentalStartDateAndTime { get; set; } = DateTime.Now; //init at creation
-    private DateTime rentalExpectedEndDateAndTime { get; set; } = rentalExpctedEndDateAndTime;
-    private DateTime rentalActualEndDateAndTime { get; set; }
+    private DateTime RentalStartDateAndTime { get; set; } = DateTime.Now; //init at creation
+    private DateTime RentalExpectedEndDateAndTime { get; set; } = rentalExpectedEndDateAndTime;
+    private DateTime RentalActualEndDateAndTime { get; set; }
 
-    private TimeSpan getRentalDuration => rentalActualEndDateAndTime - rentalStartDateAndTime;
-    private bool isRentalOverdue => rentalActualEndDateAndTime > rentalExpectedEndDateAndTime;
+    private TimeSpan GetRentalDuration => RentalActualEndDateAndTime - RentalStartDateAndTime;
+    private bool IsRentalOverdue => RentalActualEndDateAndTime > RentalExpectedEndDateAndTime;
 
-    private double rentalFee { get; set; }
-    private double overdueFee { get; set; }
+    private double RentalFee { get; set; }
+    private double OverdueFee { get; set; }
     
-    private AbstractPerson rentalPerson { get; set; } = rentalPerson;
-    private Equipment rentalEquipment { get; set; } = rentalEquipment;
+    private AbstractPerson RentalPerson { get; set; } = rentalPerson;
+    private Equipment RentalEquipment { get; set; } = rentalEquipment;
 }

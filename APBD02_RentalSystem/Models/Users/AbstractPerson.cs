@@ -1,17 +1,17 @@
-﻿namespace APBD02_RentalSystem.Users;
+﻿namespace APBD02_RentalSystem.Models.Users;
 
 public abstract class AbstractPerson
 {
     private int Id {get; set;}
     private static int NextId {get; set;}
     
-    private string name {get; set;}
-    private string surname {get; set;}
-    
-    public AbstractPerson(string name, string surname)
+    private string Name {get; set;}
+    private string Surname {get; set;}
+
+    protected AbstractPerson(string name, string surname)
     {
         Id = NextId++;
-        this.name = name;
-        this.surname = surname;
+        this.Name = name;
+        this.Surname = surname;
     }
 }

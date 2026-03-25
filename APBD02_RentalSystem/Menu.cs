@@ -1,7 +1,4 @@
-﻿using APBD02_RentalSystem.Equipments;
-using APBD02_RentalSystem.Users;
-
-namespace APBD02_RentalSystem;
+﻿namespace APBD02_RentalSystem;
 
 /*
  Aplikacja powinna wspierać co najmniej następujące operacje: 

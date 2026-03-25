@@ -1,6 +1,6 @@
-﻿using APBD02_RentalSystem.Users;
+﻿using APBD02_RentalSystem.Models.Users;
 
-namespace APBD02_RentalSystem.Equipments;
+namespace APBD02_RentalSystem.Models.Equipments;
 
 public class Camera(string name, int yearOfPurchase, Employee responsibleEmployee, int maxFps, Camera.LenseTypeEnum lenseType
     ) : Equipment(name, yearOfPurchase, responsibleEmployee)

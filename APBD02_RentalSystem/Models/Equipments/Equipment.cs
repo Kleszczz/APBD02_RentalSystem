@@ -1,6 +1,6 @@
-﻿using APBD02_RentalSystem.Users;
+﻿using APBD02_RentalSystem.Models.Users;
 
-namespace APBD02_RentalSystem.Equipments;
+namespace APBD02_RentalSystem.Models.Equipments;
 
 /*
 - Każdy egzemplarz sprzętu powinien mieć unikalny identyfikator generowany przez system.
@@ -21,7 +21,7 @@ public abstract class Equipment
     
     //TODO: Dodaj jeszcze wiecej pol wspolnych
 
-    public Equipment(string name, int yearOfPurchase, Employee responsibleEmployee)
+    protected Equipment(string name, int yearOfPurchase, Employee responsibleEmployee)
     {
         this.Id = NextId++;
         this.Name = name;
