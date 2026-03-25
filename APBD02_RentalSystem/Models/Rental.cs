@@ -3,7 +3,7 @@ using APBD02_RentalSystem.Models.Users;
 
 namespace APBD02_RentalSystem.Models;
 
-public class Rental(DateTime rentalExpectedEndDateAndTime, AbstractPerson rentalPerson, Equipment rentalEquipment)
+public class Rental(DateTime rentalExpectedEndDateAndTime, AbstractUser rentalUser, Equipment rentalEquipment)
 {
     private DateTime RentalStartDateAndTime { get; set; } = DateTime.Now; //init at creation
     private DateTime RentalExpectedEndDateAndTime { get; set; } = rentalExpectedEndDateAndTime;
@@ -15,6 +15,6 @@ public class Rental(DateTime rentalExpectedEndDateAndTime, AbstractPerson rental
     private double RentalFee { get; set; }
     private double OverdueFee { get; set; }
     
-    private AbstractPerson RentalPerson { get; set; } = rentalPerson;
+    private AbstractUser RentalUser { get; set; } = rentalUser;
     private Equipment RentalEquipment { get; set; } = rentalEquipment;
 }

@@ -21,7 +21,7 @@ using APBD02_RentalSystem.Models.Equipments;
 using APBD02_RentalSystem.Models.Users;
 
 List<Equipment> equipments = [];
-List<AbstractPerson> users = [];
+List<AbstractUser> users = [];
 List<Rental> rentals = [];
 
 Console.WriteLine("Hello, World!");
