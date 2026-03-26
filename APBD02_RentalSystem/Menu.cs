@@ -17,7 +17,7 @@ namespace APBD02_RentalSystem;
 10. Wygenerowanie krótkiego raportu podsumowującego stan wypożyczalni.
  */
 
-public class Menu
+public abstract class Menu
 {
     public static void RunMenu()
     {
@@ -40,7 +40,7 @@ public class Menu
                     RegisterNewUser();
                     break;
                 case "2":
-                    // AddNewEquipment();
+                    RegisterNewEquipment();
                     break;
                 case "3":
                     // RentEquipment();
@@ -71,7 +71,7 @@ public class Menu
         {
             return;
         }
-        
+
         Console.WriteLine("Input name and surname");
         Console.Write("Name: ");
         var name = GetValidInput();
@@ -106,12 +106,100 @@ public class Menu
             Console.ResetColor();
         }
 
-        
 
         Console.WriteLine("Naciśnij dowolny klawisz, aby wrócić...");
         Console.ReadKey();
     }
-    
+
+
+    public static void RegisterNewEquipment()
+    {
+        Console.Clear();
+        Console.WriteLine("=== EQUIPMENT REGISTRATION ===");
+
+        Console.WriteLine("Pick equipment type to create (type number)");
+        Console.WriteLine("'1' - Camera \n '2' - Laptop \n '3' - Projector \n '0' - Exit");
+        Console.Write("Input user type: ");
+        var userInput = GetValidInput();
+
+        if (userInput == "0") //exit to previous menu step
+        {
+            return;
+        }
+
+        Console.WriteLine("Input data:");
+        Console.Write("Name: ");
+        var name = GetValidInput();
+        Console.Write("yearOfPurchase: ");
+        int yearOfPurchase = Convert.ToInt32(GetValidInput());
+
+        Employee responsibleEmployee = new Employee("adam", "kowalski");
+        //wypisanie employee i ich indeksow
+        //zapytanie o numer indeksu pracownika
+        //przypisanie do pracownika urzwedzenia jako obpiekun.
+
+
+        switch (userInput)
+        {
+            case "1": //Camera
+                Console.Write("MaxFps: ");
+                int maxFps = Convert.ToInt32(GetValidInput());
+
+                Console.Write("lenseType: ");
+                var lenseType = GetValidInput();
+
+                EquipmentService.AddNewCamera(name, yearOfPurchase, responsibleEmployee, maxFps, lenseType);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("CAMERA CREATED");
+                Console.ResetColor();
+                break;
+            case "2": //Laptop
+                Console.Write("MaxFps: ");
+                int screenHz = Convert.ToInt32(GetValidInput());
+
+                Console.Write("Has TouchPad? (1-true 2-false): ");
+                var hasTouchPadUserInput = GetValidInput();
+                bool? hasTouchPad = hasTouchPadUserInput switch
+                {
+                    "1" => true,
+                    "2" => false,
+                    _ => null
+                };
+
+                EquipmentService.AddNewLaptop(name, yearOfPurchase, responsibleEmployee, screenHz, hasTouchPad);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("LAPTOP CREATED");
+                Console.ResetColor();
+                break;
+            case "3": //Projector
+                Console.Write("Is Mobile? (1-true 2-false): ");
+                var isMobileUserInput = GetValidInput();
+                bool? isMobile = isMobileUserInput switch
+                {
+                    "1" => true,
+                    "2" => false,
+                    _ => null
+                };
+
+                Console.Write("brightness in lumens: ");
+                var brightness = Convert.ToInt32(GetValidInput());
+
+                EquipmentService.AddNewProjector(name, yearOfPurchase, responsibleEmployee, isMobile, brightness);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("PROJECTOR CREATED");
+                Console.ResetColor();
+                break;
+            default:
+                Console.WriteLine("Wrong equipment type. Try again.");
+                break;
+        }
+
+
+        Console.WriteLine("Naciśnij dowolny klawisz, aby wrócić...");
+        Console.ReadKey();
+    }
+
+
     private static string GetValidInput()
     {
         string? input;

@@ -2,16 +2,10 @@
 
 namespace APBD02_RentalSystem.Models.Equipments;
 
-public class Camera(string name, int yearOfPurchase, Employee responsibleEmployee, int maxFps, Camera.LenseTypeEnum lenseType
+public class Camera(string name, int yearOfPurchase, Employee responsibleEmployee, int maxFps, string? lenseType
     ) : Equipment(name, yearOfPurchase, responsibleEmployee)
 {
-    public enum LenseTypeEnum
-    {
-        FishEye,
-        WideAngle,
-        ZoomLense
-    }
     
     private int MaxFps {get; set;} = maxFps;
-    private LenseTypeEnum LenseType {get; set;} = lenseType;
+    private string? LenseType {get; set;} = lenseType;
 }

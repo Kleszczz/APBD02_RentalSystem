@@ -4,7 +4,7 @@ namespace APBD02_RentalSystem.Services;
 
 public class UserService
 {
-    private static List<AbstractUser> _users = new List<AbstractUser>();
+    private static List<AbstractUser> _users = new List<AbstractUser>(); 
 
     public static void AddNewUser(UserType userType, string name, string surname)
     {
