@@ -61,7 +61,7 @@ public abstract class Menu
                     RentEquipmentToUser();
                     break;
                 case "6":
-                    //ReturnEquipment();
+                    ReturnEquipment();
                     break;
                 case "7":
                     //MarkEquipmentAsUnavailable();
@@ -268,6 +268,19 @@ public abstract class Menu
         
         Console.WriteLine($"Return date set to: {rentalExpectedEndDateAndTime}");
         RentalService.RentEquipmentToUser(userInputUserId, userInputEquipmentId, rentalExpectedEndDateAndTime);
+    }
+
+    private static void ReturnEquipment()
+    {
+        Console.Clear();
+        Console.WriteLine("=== RETURN EQUIPMENT ===");
+
+        RentalService.DisplayAllActiveRentals();
+        
+        Console.Write("Input Equipment ID: ");
+        var userInputEquipmentId = GetValidIntInput();
+        
+        RentalService.ReturnEquipment(userInputEquipmentId);
     }
 
 

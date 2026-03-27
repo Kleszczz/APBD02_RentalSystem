@@ -67,12 +67,70 @@ public class RentalService
         }
 
         _rentals.Add(new Rental(rentalExpectedEndDateAndTime, rentalUserObject, rentalEquipmentObject));
-        
+
         rentalEquipmentObject.IsAvailable = false;
         rentalUserObject.currentRentals += 1;
-        
+
         Console.WriteLine($"Equipment {rentalEquipmentObject} rented for {rentalUserObject}.");
         Console.WriteLine("Click enter to go back...");
+        Console.ReadKey();
+    }
+
+    public static void ReturnEquipment(int userInputEquipmentId)
+    {
+        Rental rentalObject = null;
+        foreach (var rental in _rentals)
+        {
+            if (rental.RentalEquipment.Id == userInputEquipmentId && rental.RentalActualEndDateAndTime == null)
+            {
+                rentalObject = rental;
+                break;
+            }
+        }
+
+        if (rentalObject == null)
+        {
+            Console.WriteLine("Rental not found.");
+            Console.WriteLine("\nClick enter to go back...");
+            Console.ReadKey();
+            return;
+        }
+
+        rentalObject.RentalActualEndDateAndTime = DateTime.Now;
+        rentalObject.RentalEquipment.IsAvailable = true;
+        rentalObject.RentalUser.currentRentals -= 1;
+
+        if (rentalObject.IsRentalOverdue)
+        {
+            int overdueDays = (int)Math.Ceiling(rentalObject.GetRentalOverdueDuration.Value.TotalDays);
+
+            double overduePenalty = Rental.OverdueFee * overdueDays;
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Overdue Penalty: {overduePenalty}PLN - {overdueDays} days");
+            Console.ResetColor();
+        }
+        else
+        {
+            Console.WriteLine("Returned on time, no penalty.");
+        }
+
+        Console.WriteLine($"Returned {rentalObject.RentalEquipment} from {rentalObject.RentalUser}.");
+        Console.WriteLine("\nClick enter to go back...");
+        Console.ReadKey();
+    }
+
+    public static void DisplayAllActiveRentals()
+    {
+        foreach (var rental in _rentals)
+        {
+            if (rental.RentalActualEndDateAndTime == null)
+            {
+                Console.WriteLine(rental.RentalEquipment);
+            }
+        }
+
+        Console.WriteLine("\nClick enter to go back...");
         Console.ReadKey();
     }
 }

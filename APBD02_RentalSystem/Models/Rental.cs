@@ -16,7 +16,7 @@ public class Rental()
     public DateTime? RentalActualEndDateAndTime { get; set; }
     
     public double RentalFee { get; set; }
-    public double OverdueFee { get; set; }
+    public static double OverdueFee { get; set; } = 1;
 
     public Rental(DateTime rentalExpectedEndDateAndTime, AbstractUser rentalUser, Equipment rentalEquipment) : this()
     {
@@ -28,6 +28,7 @@ public class Rental()
     }
     
     public TimeSpan? GetRentalDuration => RentalActualEndDateAndTime - RentalStartDateAndTime;
+    public TimeSpan? GetRentalOverdueDuration => RentalActualEndDateAndTime - RentalExpectedEndDateAndTime;
     public bool IsRentalOverdue => RentalActualEndDateAndTime > RentalExpectedEndDateAndTime;
     
     public override string ToString()
