@@ -1,4 +1,5 @@
-﻿using APBD02_RentalSystem.Models.Equipments;
+﻿using APBD02_RentalSystem.Models;
+using APBD02_RentalSystem.Models.Equipments;
 using APBD02_RentalSystem.Models.Users;
 using APBD02_RentalSystem.Services;
 
@@ -67,7 +68,7 @@ public abstract class Menu
                     MarkEquipmentAsUnavailable();
                     break;
                 case "8":
-                    //DisplayActiveRentalsForUser();
+                    DisplayActiveRentalsForUser();
                     break;
                 case "9":
                     //DisplayOverdueRentals();
@@ -293,6 +294,18 @@ public abstract class Menu
         var userInputEquipmentId = GetValidIntInput();
         
         EquipmentService.MarkEquipmentAsUnavailable(userInputEquipmentId);
+    }
+    
+    public static void DisplayActiveRentalsForUser()
+    {
+        Console.Clear();
+        Console.WriteLine("=== DISPLAY ALL ACTIVE RENTALS FOR USER  ===");
+        
+        UserService.DisplayAllUsers();
+        Console.Write("Input User ID: ");
+        var userInputEquipmentId = GetValidIntInput();
+        
+        RentalService.DisplayAllActiveRentalsForUser(userInputEquipmentId);
     }
 
 

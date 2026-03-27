@@ -133,4 +133,19 @@ public class RentalService
         Console.WriteLine("\nClick enter to go back...");
         Console.ReadKey();
     }
+    
+    
+    public static void DisplayAllActiveRentalsForUser(int userId)
+    {
+        foreach (var rental in _rentals)
+        {
+            if (rental.RentalUser.Id == userId && rental.RentalActualEndDateAndTime == null)
+            {
+                Console.WriteLine(rental.RentalEquipment);
+            }
+        }
+
+        Console.WriteLine("\nClick enter to go back...");
+        Console.ReadKey();
+    }
 }
