@@ -27,13 +27,20 @@ public abstract class Menu
             Console.WriteLine("=== MAIN MENU ===");
             Console.WriteLine("1. Register new user");
             Console.WriteLine("2. Add new equipment");
-            Console.WriteLine("3. Rent equipment");
+            Console.WriteLine("3. Display all equipment");
+            Console.WriteLine("4. Display available equipment");
+            Console.WriteLine("5. Rent equipment");
+            Console.WriteLine("6. Return equipment");
+            Console.WriteLine("7. Mark equipment as unavailable");
+            Console.WriteLine("8. Display active rentals for user");
+            Console.WriteLine("9. Display overdue rentals");
+            Console.WriteLine("10. Generate rental summary report");
             Console.WriteLine("0. Exit");
             Console.WriteLine("===================");
             Console.Write("Choose an option: ");
 
             var choice = GetValidInput();
-
+            Console.WriteLine(choice);
             switch (choice)
             {
                 case "1":
@@ -43,10 +50,32 @@ public abstract class Menu
                     RegisterNewEquipment();
                     break;
                 case "3":
-                    // RentEquipment();
+                    Console.WriteLine("dziala?");
+                    EquipmentService.DisplayAllEquipment();
+                    break;
+                case "4":
+                    EquipmentService.DisplayAllAvailableEquipment();
+                    break;
+                case "5":
+                    //RentEquipment();
+                    break;
+                case "6":
+                    //ReturnEquipment();
+                    break;
+                case "7":
+                    //MarkEquipmentAsUnavailable();
+                    break;
+                case "8":
+                    //DisplayActiveRentalsForUser();
+                    break;
+                case "9":
+                    //DisplayOverdueRentals();
+                    break;
+                case "10":
+                    //GenerateRentalSummaryReport();
                     break;
                 case "0":
-                    Environment.Exit(0); //Kills the program
+                    Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine("Unknown option, click ENTER to continue.");

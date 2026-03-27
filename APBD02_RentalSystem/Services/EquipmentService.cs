@@ -5,7 +5,7 @@ namespace APBD02_RentalSystem.Services;
 
 public class EquipmentService
 {
-    private static List<Equipment> _equipments = new List<Equipment>() {};
+    private static List<Equipment> _equipments = new List<Equipment>();
     
     public static void AddNewCamera(string name, int yearOfPurchase, Employee responsibleEmployee, int maxFps, string lenseType)
     {
@@ -24,4 +24,34 @@ public class EquipmentService
         Projector newProjector = new Projector(name, yearOfPurchase, responsibleEmployee, isMobile, brightness);
         _equipments.Add(newProjector);
     }
+
+    public static void DisplayAllEquipment()
+    {
+        Console.Clear();
+        Console.WriteLine("=== EQUIPMENT REGISTRY ===");
+        Console.WriteLine($"Equipment count: {_equipments.Count}");
+        foreach (var equipment in _equipments)
+        {
+            Console.WriteLine($"1: {equipment} - {equipment.IsAvailable}");
+        }
+        Console.WriteLine("Naciśnij dowolny klawisz, aby wrócić...");
+        Console.ReadKey();
+    }
+    
+    public static void DisplayAllAvailableEquipment()
+    {
+        Console.Clear();
+        Console.WriteLine("=== AVAILABLE EQUIPMENT REGISTRY ===");
+        Console.WriteLine($"Equipment count: {_equipments.Count}");
+        foreach (var equipment in _equipments)
+        {
+            if (equipment.IsAvailable)
+            {
+                Console.WriteLine($"EQ: {equipment} - {equipment.IsAvailable}");
+            }
+        }
+        Console.WriteLine("Naciśnij dowolny klawisz, aby wrócić...");
+        Console.ReadKey();
+    }
+    
 }
