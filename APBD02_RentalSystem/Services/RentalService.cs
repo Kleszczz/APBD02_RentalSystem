@@ -148,4 +148,18 @@ public class RentalService
         Console.WriteLine("\nClick enter to go back...");
         Console.ReadKey();
     }
+    
+    public static void DisplayAllOverdueRentals()
+    {
+        foreach (var rental in _rentals)
+        {
+            if (rental.IsRentalOverdue)
+            {
+                Console.WriteLine(rental);
+            }
+        }
+
+        Console.WriteLine("\nClick enter to go back...");
+        Console.ReadKey();
+    }
 }

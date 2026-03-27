@@ -71,7 +71,7 @@ public abstract class Menu
                     DisplayActiveRentalsForUser();
                     break;
                 case "9":
-                    //DisplayOverdueRentals();
+                    DisplayOverdueRentals();
                     break;
                 case "10":
                     //GenerateRentalSummaryReport();
@@ -306,6 +306,14 @@ public abstract class Menu
         var userInputEquipmentId = GetValidIntInput();
         
         RentalService.DisplayAllActiveRentalsForUser(userInputEquipmentId);
+    }
+
+    public static void DisplayOverdueRentals()
+    {
+        Console.Clear();
+        Console.WriteLine("=== DISPLAY ALL OVERDUE RENTALS  ===");
+        
+        RentalService.DisplayAllOverdueRentals();
     }
 
 
