@@ -16,6 +16,7 @@ public abstract class Equipment
     
     private string Name {get; set;}
     public bool IsAvailable {get; set;}
+    public bool IsOutOfService { get; set; } = false;
     
     private int YearOfPurchase {get; set;}
     private Employee ResponsibleEmployee {get; set;}

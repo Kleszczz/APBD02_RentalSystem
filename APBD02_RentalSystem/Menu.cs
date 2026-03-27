@@ -64,7 +64,7 @@ public abstract class Menu
                     ReturnEquipment();
                     break;
                 case "7":
-                    //MarkEquipmentAsUnavailable();
+                    MarkEquipmentAsUnavailable();
                     break;
                 case "8":
                     //DisplayActiveRentalsForUser();
@@ -281,6 +281,18 @@ public abstract class Menu
         var userInputEquipmentId = GetValidIntInput();
         
         RentalService.ReturnEquipment(userInputEquipmentId);
+    }
+
+    public static void MarkEquipmentAsUnavailable()
+    {
+        Console.Clear();
+        Console.WriteLine("=== MARK/UNMARKED EQUIPMENT OUT OF SERVICE  ===");
+        
+        EquipmentService.DisplayAllAvailableEquipment();
+        Console.Write("Input Equipment ID: ");
+        var userInputEquipmentId = GetValidIntInput();
+        
+        EquipmentService.MarkEquipmentAsUnavailable(userInputEquipmentId);
     }
 
 
