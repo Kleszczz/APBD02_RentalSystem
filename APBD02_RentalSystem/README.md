@@ -22,4 +22,4 @@ Coupling w naszym projekcie jest moim zdaniem umiarkowany – nie jest ani niski
 
 ## Jak odpalić program?
 
-Program jest napisany z myslą o używaniu w terminalu, wszystkie opcje wybiera się cyferkami, a dane wpisuje jako stringi lub liczby, wartosci bool są 1 lub 2.
+Program jest napisany z myślą o używaniu w terminalu. Wszystkie opcje wybiera się cyferkami, a dane wpisuje się jako stringi lub liczby. Wartości bool są 1 lub 2.
