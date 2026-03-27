@@ -19,3 +19,7 @@ Podział wybrałem taki, bo wydawał mi się najbardziej znajomy i logiczny. Ła
 Kohezja jest całkiem dobrze zachowana za pomocą tego modelu – wiemy dokładnie, gdzie powinno być wpisane.
 
 Coupling w naszym projekcie jest moim zdaniem umiarkowany – nie jest ani niski, ani wysoki. Niektóre zmiany wymagają zaglądania do wielu klas, ale nie zawsze.
+
+## Jak odpalić program?
+
+Program jest napisany z myslą o używaniu w terminalu, wszystkie opcje wybiera się cyferkami, a dane wpisuje jako stringi lub liczby, wartosci bool są 1 lub 2.
