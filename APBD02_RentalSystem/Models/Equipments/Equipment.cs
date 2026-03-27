@@ -15,7 +15,7 @@ public abstract class Equipment
     private static int NextId {get; set;}
     
     private string Name {get; set;}
-    private bool IsAvailable {get; set;}
+    public bool IsAvailable {get; set;}
     
     private int YearOfPurchase {get; set;}
     private Employee ResponsibleEmployee {get; set;}
@@ -29,5 +29,10 @@ public abstract class Equipment
         this.YearOfPurchase = yearOfPurchase;
         this.ResponsibleEmployee = responsibleEmployee;
         this.IsAvailable = true;
+    }
+
+    public override string ToString()
+    {
+        return ($"Id: {Id}, Name: {Name}, YearOfPurchase: {YearOfPurchase}, ResponsibleEmployee: {ResponsibleEmployee}");
     }
 }

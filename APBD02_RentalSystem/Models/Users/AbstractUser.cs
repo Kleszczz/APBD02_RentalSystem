@@ -20,4 +20,9 @@ public abstract class AbstractUser
         this.Name = name;
         this.Surname = surname;
     }
+    
+    public override string ToString()
+    {
+        return ($"Id: {Id}, Name: {Name}, Surname: {Surname}");
+    }
 }
