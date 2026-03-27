@@ -5,19 +5,6 @@ using APBD02_RentalSystem.Services;
 
 namespace APBD02_RentalSystem;
 
-/*
- Aplikacja powinna wspierać co najmniej następujące operacje:
-1. Dodanie nowego użytkownika do systemu. - metoda
-2. Dodanie nowego sprzętu danego typu.
-3. Wyświetlenie listy całego sprzętu z aktualnym statusem.
-4. Wyświetlenie wyłącznie sprzętu dostępnego do wypożyczenia.
-5. Wypożyczenie sprzętu użytkownikowi.
-6. Zwrot sprzętu wraz z przeliczeniem ewentualnej kary za opóźnienie.
-7. Oznaczenie sprzętu jako niedostępnego, np. z powodu uszkodzenia lub serwisu.
-8. Wyświetlenie aktywnych wypożyczeń danego użytkownika.
-9. Wyświetlenie listy przeterminowanych wypożyczeń.
-10. Wygenerowanie krótkiego raportu podsumowującego stan wypożyczalni.
- */
 
 public abstract class Menu
 {
@@ -74,7 +61,7 @@ public abstract class Menu
                     DisplayOverdueRentals();
                     break;
                 case "10":
-                    //GenerateRentalSummaryReport();
+                    GenerateRentalSummaryReport();
                     break;
                 case "0":
                     Environment.Exit(0);
@@ -314,6 +301,29 @@ public abstract class Menu
         Console.WriteLine("=== DISPLAY ALL OVERDUE RENTALS  ===");
         
         RentalService.DisplayAllOverdueRentals();
+    }
+
+    public static void GenerateRentalSummaryReport()
+    {
+        //Ta część jest wygenerowana z ai ale wyświetlanie danych jest moje, to raczej widać akurat po jakości.
+        Console.WriteLine("╔════════════════════════════════════════════╗");
+        Console.WriteLine("║                System report               ║");
+        Console.WriteLine("╠════════════════════════════════════════════╣");
+        Console.WriteLine($"║          Date: {DateTime.Now:yyyy-MM-dd HH:mm}            ║");
+        Console.WriteLine("╠════════════════════════════════════════════╣");
+        
+        Console.WriteLine($"║ Liczba użytkowników:          {UserService._users.Count}            ║");
+    
+        Console.WriteLine($"║ Liczba przedmiotów:           {EquipmentService._equipments.Count}            ║");
+        Console.WriteLine($"║   - Dostępne:                 {EquipmentService._equipments.Count(equipment => equipment.IsAvailable)}            ║");
+        Console.WriteLine($"║   - W serwisie:               {EquipmentService._equipments.Count(equipment => equipment.IsOutOfService)}            ║");
+        
+        Console.WriteLine($"║ Wszystkie wypożyczenia:       {RentalService._rentals.Count}            ║");
+        Console.WriteLine($"║   - Przeterminowane:          {RentalService._rentals.Count(rental => rental.IsRentalOverdue)}            ║");
+    
+        Console.WriteLine("╚════════════════════════════════════════════╝");
+        Console.WriteLine("Naciśnij dowolny klawisz, aby wrócić...");
+        Console.ReadKey();
     }
 
 
