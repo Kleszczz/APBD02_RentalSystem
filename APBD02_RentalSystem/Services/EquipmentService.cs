@@ -5,7 +5,7 @@ namespace APBD02_RentalSystem.Services;
 
 public class EquipmentService
 {
-    private static List<Equipment> _equipments = new List<Equipment>();
+    public static List<Equipment> _equipments = new List<Equipment>();
     
     public static void AddNewCamera(string name, int yearOfPurchase, Employee responsibleEmployee, int maxFps, string lenseType)
     {

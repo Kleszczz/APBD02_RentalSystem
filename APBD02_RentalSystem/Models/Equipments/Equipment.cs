@@ -11,7 +11,7 @@ namespace APBD02_RentalSystem.Models.Equipments;
 
 public abstract class Equipment
 {
-    private int Id {get; set;}
+    public int Id {get;}
     private static int NextId {get; set;}
     
     private string Name {get; set;}

@@ -4,7 +4,7 @@ namespace APBD02_RentalSystem.Services;
 
 public class UserService
 {
-    private static List<AbstractUser> _users = new List<AbstractUser>(); 
+    public static List<AbstractUser> _users = new List<AbstractUser>(); 
 
     public static void AddNewUser(UserType userType, string name, string surname)
     {
@@ -26,5 +26,18 @@ public class UserService
         {
             _users.Add(newUser);
         }
+    }
+    
+    public static void DisplayAllUsers()
+    {
+        Console.Clear();
+        Console.WriteLine("=== USER REGISTRY ===");
+        Console.WriteLine($"User count: {_users.Count}");
+        foreach (var user in _users)
+        {
+            Console.WriteLine($"1: {user}");
+        }
+        Console.WriteLine("Naciśnij dowolny klawisz, aby wrócić...");
+        Console.ReadKey();
     }
 }

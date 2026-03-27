@@ -1,4 +1,5 @@
-﻿using APBD02_RentalSystem.Models.Users;
+﻿using APBD02_RentalSystem.Models.Equipments;
+using APBD02_RentalSystem.Models.Users;
 using APBD02_RentalSystem.Services;
 
 namespace APBD02_RentalSystem;
@@ -57,7 +58,7 @@ public abstract class Menu
                     EquipmentService.DisplayAllAvailableEquipment();
                     break;
                 case "5":
-                    //RentEquipment();
+                    RentEquipmentToUser();
                     break;
                 case "6":
                     //ReturnEquipment();
@@ -160,7 +161,7 @@ public abstract class Menu
         Console.Write("Name: ");
         var name = GetValidInput();
         Console.Write("yearOfPurchase: ");
-        int yearOfPurchase = Convert.ToInt32(GetValidInput());
+        int yearOfPurchase = GetValidIntInput();;
 
         Employee responsibleEmployee = new Employee("adam", "kowalski");
         //wypisanie employee i ich indeksow
@@ -172,7 +173,7 @@ public abstract class Menu
         {
             case "1": //Camera
                 Console.Write("MaxFps: ");
-                int maxFps = Convert.ToInt32(GetValidInput());
+                int maxFps = GetValidIntInput();;
 
                 Console.Write("lenseType: ");
                 var lenseType = GetValidInput();
@@ -184,7 +185,7 @@ public abstract class Menu
                 break;
             case "2": //Laptop
                 Console.Write("MaxFps: ");
-                int screenHz = Convert.ToInt32(GetValidInput());
+                int screenHz = GetValidIntInput();;
 
                 Console.Write("Has TouchPad? (1-true 2-false): ");
                 var hasTouchPadUserInput = GetValidInput();
@@ -211,7 +212,7 @@ public abstract class Menu
                 };
 
                 Console.Write("brightness in lumens: ");
-                var brightness = Convert.ToInt32(GetValidInput());
+                var brightness = GetValidIntInput();;
 
                 EquipmentService.AddNewProjector(name, yearOfPurchase, responsibleEmployee, isMobile, brightness);
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -228,8 +229,49 @@ public abstract class Menu
         Console.ReadKey();
     }
 
+    private static void RentEquipmentToUser()
+    {
+        Console.Clear();
+        Console.WriteLine("=== RENT EQUIPMENT TO USER ===");
 
-    private static string GetValidInput()
+        Console.WriteLine("AVAILABLE EQUIPMENTS");
+        EquipmentService.DisplayAllAvailableEquipment();
+        Console.Write("Input Equipment ID: ");
+        var userInputEquipmentId = GetValidIntInput();;
+
+        Console.WriteLine("AVAILABLE USERS");
+        UserService.DisplayAllUsers();
+        Console.Write("Input User ID: ");
+        var userInputUserId = GetValidIntInput();;
+        
+        Console.WriteLine("RENTAL END DATE");
+        Console.Write("SET THE DATE (dd-MM-yyyy): ");
+        string input = GetValidInput();
+
+        DateTime rentalExpectedEndDateAndTime;
+
+        if (!DateTime.TryParse(input, out rentalExpectedEndDateAndTime))
+        {
+            Console.WriteLine("Error: Invalid date format.");
+            Console.WriteLine("Click enter to go back...");
+            Console.ReadKey();
+            return; 
+        }
+        
+        if (rentalExpectedEndDateAndTime < DateTime.Now)
+        {
+            Console.WriteLine("Error: Date cannot be in the past.");
+            Console.WriteLine("Click enter to go back...");
+            Console.ReadKey();
+            return;
+        }
+        
+        Console.WriteLine($"Return date set to: {rentalExpectedEndDateAndTime}");
+        RentalService.RentEquipmentToUser(userInputUserId, userInputEquipmentId, rentalExpectedEndDateAndTime);
+    }
+
+
+    public static string GetValidInput()
     {
         string? input;
         do
@@ -243,5 +285,18 @@ public abstract class Menu
         } while (string.IsNullOrWhiteSpace(input));
 
         return input;
+    }
+    
+    public static int GetValidIntInput()
+    {
+        while (true)
+        {
+            string input = GetValidInput();
+            if (int.TryParse(input, out int result))
+            {
+                return result;
+            }
+            Console.WriteLine("Invalid number, try again:");
+        }
     }
 }

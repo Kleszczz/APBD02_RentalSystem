@@ -8,17 +8,22 @@ public enum UserType
 
 public abstract class AbstractUser
 {
-    private int Id {get; set;}
+    public int Id { get; }
     private static int NextId {get; set;}
     
-    private string Name {get; set;}
-    private string Surname {get; set;}
+    public string Name {get; set;}
+    public string Surname {get; set;}
+    
+    public int MaxRentals {get;}
+    public int currentRentals { get; set; } = 0;
+    
 
-    protected AbstractUser(string name, string surname)
+    protected AbstractUser(string name, string surname,  int maxRentals)
     {
         Id = NextId++;
         this.Name = name;
         this.Surname = surname;
+        MaxRentals = maxRentals;
     }
     
     public override string ToString()
